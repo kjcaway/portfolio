@@ -5,7 +5,7 @@ import "gestalt/dist/gestalt.css";
 import Menu from "../components/common/Menu";
 import Header from "../components/common/Header";
 
-const MainTemplate = ({match}) => {
+const MainTemplate = () => {
   return (
     <Box
       column={12}
