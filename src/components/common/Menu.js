@@ -1,26 +1,22 @@
-import React, {useState} from "react";
+import React from "react";
 import { Box, Text, Link } from "gestalt";
 import "gestalt/dist/gestalt.css";
 
-const Menu = () => {
-  const [menuIdx, setMenuInx] = useState(0)
+const Menu = (props) => {
+  console.log('active menu : ' + props.active)
 
-  const onHandleChange = (idx) => {
-    setMenuInx(idx)
-  }
-  
   const memuItems = () => {
     const arr = [
-      {link:'#', name:'About Me'},
-      {link:'#', name:'Skills'},
-      {link:'#', name:'Projects'}
+      {menu:'aboutme', link:'/', name:'About Me'},
+      {menu:'skills', link:'/skills', name:'Skills'},
+      {menu:'projects', link:'/projects', name:'Projects'}
     ];
 
     return arr.map((obj,idx) => {
-      const active = (idx === menuIdx?true:false)
+      const active = (obj.menu === props.active?true:false)
       return (
-        <Text color="white" size={active?'lg':'md'} bold={active}>
-          <Link href={obj.link} onClick={() => onHandleChange(idx)}>
+        <Text color="white" size={active?'xl':'md'} bold={active} key={idx}>
+          <Link href={obj.link} >
             <Box padding={3}>{obj.name}</Box>
           </Link>
         </Text>
