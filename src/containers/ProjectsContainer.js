@@ -1,14 +1,12 @@
-import React from 'react'
-import { Text } from "gestalt";
+import React from "react";
+import "gestalt/dist/gestalt.css";
+
+import ProjectsTemplate from '../templates/ProjectsTemplate'
 
 const ProjectsContainer = () => {
   return (
-    <>
-      <Text>
-        Projects
-      </Text>
-    </>
-  )
-}
+    <ProjectsTemplate/>
+  );
+};
 
-export default ProjectsContainer
+export default ProjectsContainer;

@@ -35,7 +35,7 @@ const MainTemplate = ({match}) => {
           <Header />
           <Menu active={menu}/>
         </Box>
-        <Box padding={5}>
+        <Box padding={2}>
           {getContainer(menu)}
         </Box>
       </Box>

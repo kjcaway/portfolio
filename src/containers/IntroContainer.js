@@ -1,13 +1,11 @@
 import React from 'react'
 import { Text } from "gestalt";
 
+import IntroTemplate from '../templates/IntroTemplate'
+
 const IntroContainer = () => {
   return (
-    <>
-      <Text>
-        intro
-      </Text>
-    </>
+    <IntroTemplate/>
   )
 }
 
