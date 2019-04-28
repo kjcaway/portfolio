@@ -10,7 +10,6 @@ import {
   Heading
 } from "gestalt";
 import "gestalt/dist/gestalt.css";
-import _ from "lodash";
 
 import MyImage from "../statics/images/basket.jpg";
 

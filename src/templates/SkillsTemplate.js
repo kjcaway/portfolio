@@ -8,7 +8,6 @@ import {
   Heading
 } from "gestalt";
 import "gestalt/dist/gestalt.css";
-import _ from "lodash";
 
 const SkillsTemplate = () => {
   return (

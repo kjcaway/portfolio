@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Box } from "gestalt";
 import "gestalt/dist/gestalt.css";
 import _ from 'lodash'
@@ -21,6 +21,17 @@ const MainTemplate = ({match}) => {
       default : return <IntroContainer/>
     }
   }
+
+  const connectServer = () => {
+    console.log('execute connect server...');
+    fetch('/api/')
+    .then(res => res.json())
+    .then(data => console.log(data));
+  }
+
+  useEffect(() => {
+    connectServer();
+  }, []);
 
   return (
     <Box
