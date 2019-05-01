@@ -6,7 +6,7 @@ const pool = mysql.createPool(config);
 logger.info('Connection pool created.');
 
 pool.on('acquire', function (connection) {
-  logger.info('Connection %d acquired', connection.threadId);
+  logger.info(`Connection ${connection.threadId} acquired`);
 });
 
 pool.on('enqueue', function () {
@@ -14,7 +14,7 @@ pool.on('enqueue', function () {
 });
 
 pool.on('release', function (connection) {
-  logger.info('Connection %d released', connection.threadId);
+  logger.info(`Connection ${connection.threadId} released`);
 });
 
 const getConn = function(callback) {

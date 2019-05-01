@@ -8,8 +8,7 @@ router.get("/", (req, res) => {
     connection.query("SELECT * FROM MEMBER", (err, rows) => {
       connection.release();
       if (err) {
-        console.log(err);
-        return res.json({ err: err });
+        throw err;
       }
 
       return res.json({ data: rows });

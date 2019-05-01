@@ -9,8 +9,8 @@ app.use('/api', api);
 
 // error handler
 app.use(function (err, req, res, next) {
-  logger.error('Error handler : ', err);
-  res.status(500).send('Something broke!');
+  logger.error(`${err}`);
+  return res.status(500).json({error: 1, message:'Internal Server Error.'});
 });
 
 const port = process.env.PORT || 3001;
