@@ -42,7 +42,7 @@ router.get("/", (req, res, next) => {
 router.post("/", (req, res, next) => {
   const validError = schema.validate(req.body);
   if(validError.length > 0){
-    logger.info("invalid request")
+    logger.error("invalid request")
     return res.status(400).json({'error': 1, 'message' :validError[0].message})
   }
 
@@ -51,13 +51,11 @@ router.post("/", (req, res, next) => {
       date_write: moment().format('YYYY-MM-DD HH:mm:ss')
     })
     
-    let query =connection.query("INSERT INTO CONTENTS SET ?", data, (err, results, field) => {
+    let query =connection.query("INSERT INTO CONTENTS SET ?", data, (err, results, fields) => {
       connection.release();
       if (err) {
         return next(err);
       }
-      logger.info('results = ' + results);
-      logger.info('field = ' + field);
 
       return res.json({ results: results });
     });
@@ -66,5 +64,22 @@ router.post("/", (req, res, next) => {
   });
 });
 
+/**
+ * Method : DELETE
+ * CONTENT 삭제 
+ */
+router.delete("/remove/:seq", (req, res, next) => {
+  db((err, connection) => {
+    let query = connection.query("DELETE FROM CONTENTS WHERE SEQ = ?", req.params.seq, (err, results, fields) => {
+      connection.release();
+      if (err) {
+        return next(err);
+      }
+
+      return res.json({ results: results });
+    });
+    logger.debug('Execute query.\n\n\t\t' + query.sql + '\n');
+  });
+});
 
 module.exports = router;
