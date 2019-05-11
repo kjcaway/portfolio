@@ -1,11 +1,34 @@
-import React from 'react'
+import React,  {useEffect, useState} from 'react'
+import { connect } from "react-redux";
+import * as contentActions from "../redux/modules/contents";
+import Intro from '../components/intro/Intro';
 
-import IntroTemplate from '../templates/IntroTemplate'
+const IntroContainer = (props) => {
 
-const IntroContainer = () => {
+  useEffect(() => {
+    props.getContents().then(() => {
+      
+    })
+
+  }, []);
+
   return (
-    <IntroTemplate/>
+    <Intro/>
   )
 }
 
-export default IntroContainer
+const mapStateToProps = (state) => {
+  return {
+    viewStatus: state.contents
+  }
+};
+
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    getContents: () => {
+      return dispatch(contentActions.getContents());
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(IntroContainer);
