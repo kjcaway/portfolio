@@ -3,7 +3,7 @@ This project is simple portfolio web application using React
 ## Using skills
 ### Front-end
 - react
-- redux
+- redux (ducks-pattern [https://github.com/erikras/ducks-modular-redux](https://github.com/erikras/ducks-modular-redux))
 - gestalt(Web UI Framework for react)
 
 ### Back-end
