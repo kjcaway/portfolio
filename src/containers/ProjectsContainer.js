@@ -1,12 +1,42 @@
-import React from "react";
-import "gestalt/dist/gestalt.css";
+import React,  {Component} from 'react'
+import { connect } from "react-redux";
+import * as contentActions from "../redux/modules/contents";
+import Projects from '../components/projects/Projects';
 
-import ProjectsTemplate from '../templates/ProjectsTemplate'
+class ProjectsContainer extends Component {
+  constructor(props) {
+    super(props);
 
-const ProjectsContainer = () => {
-  return (
-    <ProjectsTemplate/>
-  );
+    this.state = {};
+  }
+
+  componentDidMount(props){
+    return this.props.getContents().then(() => {
+      console.log(this.props.contents)
+    })
+  }
+
+  render() {
+    return (
+      <Projects 
+        data={this.props.contents.data}
+      />
+    )
+  }
+}
+
+const mapStateToProps = (state) => {
+  return {
+    contents: state.contents
+  }
 };
 
-export default ProjectsContainer;
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    getContents: () => {
+      return dispatch(contentActions.getContents());
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectsContainer);

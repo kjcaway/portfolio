@@ -13,7 +13,7 @@ const Intro = (props) => {
     return data.map((obj, idx) => {
       return (
         <div key={idx}>
-          <Item data={obj}/>
+          <Item data={obj} idx={idx}/>
           <Divider />
         </div>
       )

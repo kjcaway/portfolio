@@ -1,11 +1,42 @@
-import React from 'react'
+import React,  {Component} from 'react'
+import { connect } from "react-redux";
+import * as contentActions from "../redux/modules/contents";
+import Skill from '../components/skill/Skill';
 
-import SkillsTemplate from '../templates/SkillsTemplate'
+class SkillContainer extends Component {
+  constructor(props) {
+    super(props);
 
-const SkillsContainer = () => {
-  return (
-    <SkillsTemplate/>
-  )
+    this.state = {};
+  }
+
+  componentDidMount(props){
+    return this.props.getContents().then(() => {
+      console.log(this.props.contents)
+    })
+  }
+
+  render() {
+    return (
+      <Skill 
+        data={this.props.contents.data}
+      />
+    )
+  }
 }
 
-export default SkillsContainer
+const mapStateToProps = (state) => {
+  return {
+    contents: state.contents
+  }
+};
+
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    getContents: () => {
+      return dispatch(contentActions.getContents());
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SkillContainer);

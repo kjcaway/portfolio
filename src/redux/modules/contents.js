@@ -1,7 +1,7 @@
 import axios from "axios";
 import update from "react-addons-update";
 
-// action
+// Action
 const LOAD = "contents/LOAD";
 const SUCCESS = "contents/SUCCESS";
 const FAIL = "contents/FAIL";
@@ -12,6 +12,13 @@ export function loadContents(data) {
   };
 }
 
+/**
+ * Action forrmat
+ * {
+ *  type : String
+ *  data : Array<Object>
+ * }
+ */
 export function success(data) {
   return {
     type: SUCCESS,
@@ -27,7 +34,7 @@ export function fail(error) {
 }
 
 
-// api action
+// API action
 export function getContents(){
   return dispatch => {
     dispatch(loadContents());
@@ -35,17 +42,17 @@ export function getContents(){
     return axios.get('/api/contents/')
       .then(res => {
         console.log('[action] getContents...');
-        dispatch(success(res.data.data)); // data는 {data : array}형태 
+        dispatch(success(res.data.data)); // res.data는 {data : array}형태 
       })
       .catch(err => {
         console.log(err);
-        dispatch(fail(err)); // data는 {data : array}형태 
+        dispatch(fail(err));
       })
   }
 
 }
 
-//reducer --> export default
+// Reducer
 const initialState = {
   status: 'INIT',
   data: [],
