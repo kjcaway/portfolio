@@ -11,29 +11,32 @@ import {
 import "gestalt/dist/gestalt.css";
 
 
-const Item = () => {
+const Item = (props) => {
+  const onClick = (props) => {
+    alert(props.data.url_link)
+  }
+  
   return (
     <Container>
       <Box display="flex" paddingY={4} alignItems="center" direction="row">
-        <Card image={<Avatar name="Jongchan Kang" />}>
+        <Card image={<Avatar name="avatar" />}>
           <Text align="center" bold size="xl">
             <Box paddingX={3} paddingY={2}>
-              JongChan Kang
+              {props.data.writer}
             </Box>
           </Text>
           <Button
             accessibilityLabel="Go to Blog"
             color="red"
             text="Go to Blog"
+            onClick={() => onClick(props)}
           />
         </Card>
         <Box padding={4}>
           <Heading size="sm" color="gray">
-            I am Web Developer.
+            {props.data.title}
           </Heading>
-          <Text>jlwjeflkwjefkljwlekfjwlejf</Text>
-          <Text>blurblurblur</Text>
-          <Text>JJuJJu</Text>
+          <Text>{props.data.contents}</Text>
         </Box>
       </Box>
     </Container>

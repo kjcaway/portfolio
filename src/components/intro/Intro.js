@@ -7,19 +7,21 @@ import "gestalt/dist/gestalt.css";
 
 import Item from './Item';
 
-const Intro = () => {
+const Intro = (props) => {
 
-  const renderItem = () => {
-    return (
-      <>
-        <Item/>
-        <Divider />
-      </>
-    )
+  const renderItems = (data) => {
+    return data.map((obj, idx) => {
+      return (
+        <div key={idx}>
+          <Item data={obj}/>
+          <Divider />
+        </div>
+      )
+    })
   }
   return (
     <Box column={12} justifyContent="center">
-      {renderItem()}
+      {renderItems(props.data)}
     </Box>
   );
 };

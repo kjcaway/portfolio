@@ -3,11 +3,26 @@ import update from "react-addons-update";
 
 // action
 const LOAD = "contents/LOAD";
+const SUCCESS = "contents/SUCCESS";
+const FAIL = "contents/FAIL";
 
 export function loadContents(data) {
   return {
-    type: LOAD,
+    type: LOAD
+  };
+}
+
+export function success(data) {
+  return {
+    type: SUCCESS,
     data
+  };
+}
+
+export function fail(error) {
+  return {
+    type: FAIL,
+    error
   };
 }
 
@@ -20,10 +35,11 @@ export function getContents(){
     return axios.get('/api/contents/')
       .then(res => {
         console.log('[action] getContents...');
-        dispatch(loadContents(res.data)); // data는 {data : array}형태 
+        dispatch(success(res.data.data)); // data는 {data : array}형태 
       })
       .catch(err => {
         console.log(err);
+        dispatch(fail(err)); // data는 {data : array}형태 
       })
   }
 
@@ -32,7 +48,8 @@ export function getContents(){
 //reducer --> export default
 const initialState = {
   status: 'INIT',
-  data: []
+  data: [],
+  error: -1
 };
 
 function reducer(state=initialState, action) {
@@ -40,7 +57,16 @@ function reducer(state=initialState, action) {
     case LOAD:
       return update(state, {
         status : {$set : "LOAD"},
+      })
+    case SUCCESS:
+      return update(state, {
+        status : {$set : "SUCCESS"},
         data: {$set:action.data}
+      })
+    case FAIL:
+      return update(state, {
+        status : {$set : "FAIL"},
+        error: {$set:action.err}
       })
     default:
       return state;

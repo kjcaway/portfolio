@@ -1,25 +1,33 @@
-import React,  {useEffect, useState} from 'react'
+import React,  {Component} from 'react'
 import { connect } from "react-redux";
 import * as contentActions from "../redux/modules/contents";
 import Intro from '../components/intro/Intro';
 
-const IntroContainer = (props) => {
+class IntroContainer extends Component {
+  constructor(props) {
+    super(props);
 
-  useEffect(() => {
-    props.getContents().then(() => {
-      
+    this.state = {};
+  }
+
+  componentDidMount(props){
+    return this.props.getContents().then(() => {
+      console.log(this.props.contents)
     })
+  }
 
-  }, []);
-
-  return (
-    <Intro/>
-  )
+  render() {
+    return (
+      <Intro 
+        data={this.props.contents.data}
+      />
+    )
+  }
 }
 
 const mapStateToProps = (state) => {
   return {
-    viewStatus: state.contents
+    contents: state.contents
   }
 };
 
