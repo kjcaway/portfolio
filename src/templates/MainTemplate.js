@@ -9,6 +9,7 @@ import Header from "../components/common/Header";
 import IntroContainer from '../containers/IntroContainer';
 import SkillsContainer from '../containers/SkillsContainer';
 import ProjectsContainer from '../containers/ProjectsContainer';
+import WriteTemplate from './fakeTemplates/WriteTemplate';
 
 const MainTemplate = ({match}) => {
   const menu = _.defaultTo(match.params.menu,'aboutme')
@@ -18,6 +19,7 @@ const MainTemplate = ({match}) => {
       case 'aboutme' : return <IntroContainer/>
       case 'skills' : return <SkillsContainer/>
       case 'projects' : return <ProjectsContainer/>
+      case 'write' : return <WriteTemplate/>
       default : return <IntroContainer/>
     }
   }
