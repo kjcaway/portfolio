@@ -11,7 +11,7 @@ module.exports = new Schema({
     required : true,
     length: { min: 1, max: 2 }
   },
-  contetns: {
+  contents: {
     type: String,
     length: { max: 2000 }
   },

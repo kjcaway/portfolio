@@ -42,7 +42,7 @@ router.get("/", (req, res, next) => {
 router.post("/", (req, res, next) => {
   const validError = schema.validate(req.body);
   if(validError.length > 0){
-    logger.error("invalid request")
+    logger.error("invalid request, " + validError[0].message)
     return res.status(400).json({'error': 1, 'message' :validError[0].message})
   }
 

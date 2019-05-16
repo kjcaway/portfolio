@@ -6,19 +6,14 @@ const LOAD = "contents/LOAD";
 const SUCCESS = "contents/SUCCESS";
 const FAIL = "contents/FAIL";
 
+const CREATE = "contents/CREATE";
+
 export function loadContents(data) {
   return {
     type: LOAD
   };
 }
 
-/**
- * Action forrmat
- * {
- *  type : String
- *  data : Array<Object>
- * }
- */
 export function success(data) {
   return {
     type: SUCCESS,
@@ -33,6 +28,11 @@ export function fail(error) {
   };
 }
 
+export function createContents() {
+  return {
+    type: CREATE,
+  };
+}
 
 // API action
 export function getContents(){
@@ -49,7 +49,20 @@ export function getContents(){
         dispatch(fail(err));
       })
   }
+}
 
+export function setContents(contents){
+  return dispatch => {
+    dispatch(createContents());
+    console.log(contents)
+    return axios.post('/api/contents/', contents)
+      .then(res => {
+        console.log('[action] setContents...');
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
 }
 
 // Reducer
@@ -74,6 +87,10 @@ function reducer(state=initialState, action) {
       return update(state, {
         status : {$set : "FAIL"},
         error: {$set:action.err}
+      })
+    case CREATE:
+      return update(state, {
+        status : {$set : "CREATE"},
       })
     default:
       return state;
