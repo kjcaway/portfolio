@@ -22,7 +22,7 @@ router.get("/", (req, res, next) => {
   }
 
   db((err, connection) => {
-    let query = connection.query("SELECT * FROM CONTENTS WHERE 1=1" + where, (err, rows) => {
+    let query = connection.query("SELECT * FROM CONTENTS WHERE 1=1" + where + " ORDER BY date_write DESC", (err, rows) => {
       connection.release();
       if (err) {
         return next(err);
