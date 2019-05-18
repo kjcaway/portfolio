@@ -10,6 +10,7 @@
     "gestalt": "^0.95.0",
     "history": "^4.9.0",
     "http-proxy-middleware": "^0.19.1",
+    "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.11",
     "moment": "^2.24.0",
     "mysql": "^2.17.1",
