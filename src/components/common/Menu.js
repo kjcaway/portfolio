@@ -1,9 +1,9 @@
 import React from "react";
-import { Box, Text, Link } from "gestalt";
+import { Box, Text, Link, IconButton } from "gestalt";
 import "gestalt/dist/gestalt.css";
 
 const Menu = (props) => {
-  console.log('active menu : ' + props.active)
+  console.log('active menu : ' + props.active);
 
   const memuItems = () => {
     const arr = [
@@ -15,18 +15,32 @@ const Menu = (props) => {
     return arr.map((obj,idx) => {
       const active = (obj.menu === props.active?true:false)
       return (
-        <Text color="white" size={active?'xl':'md'} bold={active} key={idx}>
-          <Link href={obj.link} >
-            <Box padding={3}>{obj.name}</Box>
-          </Link>
-        </Text>
+        <Box key={idx}>
+          <Text color="white" size={active?'xl':'md'} bold={active} >
+            <Link href={obj.link} >
+              <Box padding={3}>{obj.name}</Box>
+            </Link>
+          </Text>
+        </Box>
       )
     })
   }
 
+  
   return (
     <Box display="flex" column={12} justifyContent="center" color="orchid">
-      {memuItems()}
+      <Box paddingX={1}  flex="grow" display="flex" direction="row">
+        {memuItems()}
+      </Box>
+      <Box alignItems="center" display="flex" marginRight={2} >
+        <IconButton
+          accessibilityLabel="Love"
+          bgColor="white"
+          icon="lock"
+          iconColor="darkGray"
+          onClick={() => props.onHandlerClickLogin()}
+        />
+      </Box>
     </Box>
   )
 }
