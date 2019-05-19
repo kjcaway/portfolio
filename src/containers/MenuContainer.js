@@ -12,8 +12,11 @@ class MenuContainer extends Component {
 
   componentDidMount(props){
     return this.props.checkToken().then(() => {
-      console.log('checking token for menu view')
     })
+  }
+
+  handleLogout(){
+    return null;
   }
 
   render() {
@@ -21,7 +24,9 @@ class MenuContainer extends Component {
       <Menu 
         active={this.props.active}
         onHandlerClickLogin={this.props.onHandlerClickLogin}
-        isLogged={this.props.member.isLogged}
+        onHandlerClickLogout={this.handleLogout.bind(this)}
+        isLogged={this.props.isLogged}
+        status={this.props.status}
       />
     )
   }
@@ -29,7 +34,8 @@ class MenuContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    member : state.member
+    isLogged : state.member.isLogged,
+    status : state.member.status
   }
 }
 

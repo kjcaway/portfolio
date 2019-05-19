@@ -14,10 +14,11 @@ class LoginContainer extends Component {
     return this.props.getToken(userinfo)
       .then(() => {
         console.log('request token')
-        if(this.props.member.error){
+        if(this.props.loginError){
           alert("잘못된 ID 또는 PASSWORD 입니다.")
         } else{
           this.props.onHandleClose();
+          this.props.checkToken();
         }
       })
   }
@@ -34,7 +35,7 @@ class LoginContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    member : state.member
+    loginError : state.member.error
   }
 }
 

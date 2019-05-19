@@ -3,7 +3,8 @@ import { Box, Text, Link, IconButton } from "gestalt";
 import "gestalt/dist/gestalt.css";
 
 const Menu = (props) => {
-  console.log('active menu : ' + props.active);
+  // login icon은 auth check 후 표시 되도록 함. 
+  const viewIconYN = (props.status !== 'INIT' && props.status !== 'WAITING');
 
   const memuItems = () => {
     const arr = [
@@ -26,14 +27,24 @@ const Menu = (props) => {
     })
   }
 
-  
   return (
     <Box display="flex" column={12} justifyContent="center" color="orchid">
       <Box paddingX={1}  flex="grow" display="flex" direction="row">
         {memuItems()}
       </Box>
       {
-        props.isLogged?undefined:
+        viewIconYN && 
+        (props.isLogged?
+        <Box alignItems="center" display="flex" marginRight={2} >
+          <IconButton
+            accessibilityLabel="Love"
+            bgColor="white"
+            icon="logout"
+            iconColor="darkGray"
+            onClick={() => props.onHandlerClickLogout()}
+          />
+        </Box>
+        :
         <Box alignItems="center" display="flex" marginRight={2} >
           <IconButton
             accessibilityLabel="Love"
@@ -43,6 +54,7 @@ const Menu = (props) => {
             onClick={() => props.onHandlerClickLogin()}
           />
         </Box>
+        )
       }
     </Box>
   )

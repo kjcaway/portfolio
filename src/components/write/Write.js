@@ -90,7 +90,6 @@ const Write = (props) => {
         <Box marginTop={2}>
           <Button color="red" text="Submit" type="submit" 
             onClick={(e) => {
-              console.log(title)
               props.onPost({
                 title: title,
                 contents: contents,
