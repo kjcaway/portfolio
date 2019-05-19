@@ -2,6 +2,7 @@ const express = require("express");
 const db = require("../db");
 const jwt = require('jsonwebtoken')
 const jwtConfig = require('../config/jwt')
+const _ = require('lodash');
 
 const router = express.Router();
 
@@ -28,9 +29,10 @@ router.post("/signin", (req, res) => {
   const {userid, password} = req.body
 
   if(userid === undefined || password === undefined){
-    return res.status(400).json({data : 'Bad request'});
+    return res.status(400).json({
+      data : 'Bad request'
+    });
   }
-
   db((err, connection) => {
     connection.query("SELECT * FROM MEMBER WHERE `id` = \"" + userid + "\"", (err, rows) => {
       connection.release();
@@ -38,8 +40,10 @@ router.post("/signin", (req, res) => {
         throw err;
       }
       
-      if(rows == null) {
-        return res.json({ data: 'Wrong userid'});
+      if(_.isEmpty(rows)) {
+        return res.status(401).json({ 
+          data: 'Wrong userid'
+        });
       } else {
         const user = rows[0];
         if(user.password === password){
@@ -58,7 +62,9 @@ router.post("/signin", (req, res) => {
             token: token
           })
         } else{
-          return res.json({ data: 'Wrong password'});
+          return res.status(401).json({ 
+            data: 'Wrong password'
+          });
         }
       }
     });
@@ -75,7 +81,7 @@ router.get("/check", (req, res) => {
   if(decodedToken){
     return res.json({data: 'Valid token'});
   } else {
-    return res.json({data: "Invalid token"});
+    return res.status(401).json({data: "Invalid token"});
   }
 })
 

@@ -32,15 +32,18 @@ const Menu = (props) => {
       <Box paddingX={1}  flex="grow" display="flex" direction="row">
         {memuItems()}
       </Box>
-      <Box alignItems="center" display="flex" marginRight={2} >
-        <IconButton
-          accessibilityLabel="Love"
-          bgColor="white"
-          icon="lock"
-          iconColor="darkGray"
-          onClick={() => props.onHandlerClickLogin()}
-        />
-      </Box>
+      {
+        props.isLogged?undefined:
+        <Box alignItems="center" display="flex" marginRight={2} >
+          <IconButton
+            accessibilityLabel="Love"
+            bgColor="white"
+            icon="lock"
+            iconColor="darkGray"
+            onClick={() => props.onHandlerClickLogin()}
+          />
+        </Box>
+      }
     </Box>
   )
 }

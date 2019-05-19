@@ -1,17 +1,18 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import { Box } from "gestalt";
 import "gestalt/dist/gestalt.css";
 import _ from 'lodash'
 
-import Menu from "../components/common/Menu";
 import Header from "../components/common/Header";
 import Footer from "../components/common/Footer";
-import Login from "../components/login/Login";
+
 
 import IntroContainer from '../containers/IntroContainer';
 import SkillsContainer from '../containers/SkillsContainer';
 import ProjectsContainer from '../containers/ProjectsContainer';
 import WriteContainer from '../containers/WriteContainer';
+import LoginContainer from '../containers/LoginContainer';
+import MenuContainer from '../containers/MenuContainer';
 
 const MainTemplate = ({match}) => {
   const menu = _.defaultTo(match.params.menu,'aboutme')
@@ -27,16 +28,16 @@ const MainTemplate = ({match}) => {
     }
   }
 
-  const connectServer = () => {
-    console.log('execute connect server...');
-    fetch('/api/')
-    .then(res => res.json())
-    .then(data => console.log(data));
-  }
+  // const connectServer = () => {
+  //   console.log('execute connect server...');
+  //   fetch('/api/')
+  //   .then(res => res.json())
+  //   .then(data => console.log(data));
+  // }
 
-  useEffect(() => {
-    connectServer();
-  }, []);
+  // useEffect(() => {
+  //   connectServer();
+  // }, []);
 
   const activeModal = () => {
     setIsPopLogin(true);
@@ -57,14 +58,14 @@ const MainTemplate = ({match}) => {
       <Box maxWidth={960} column={12} color="white" shape="rounded">
         <Box color="eggplant" shape="roundedTop">
           <Header />
-          <Menu active={menu} onHandlerClickLogin={() => activeModal()}/>
+          <MenuContainer active={menu} onHandlerClickLogin={() => activeModal()}/>
         </Box>
         <Box padding={2}>
           {getContainer(menu)}
         </Box>
         <Footer/>
       </Box>
-      {isPopLogin && <Login onHandleClose={() => deactiveModal()}/>}
+      {isPopLogin && <LoginContainer onHandleClose={() => deactiveModal()}/>}
     </Box>
   );
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
   Box,
   Text,
@@ -12,6 +12,10 @@ import {
 import "gestalt/dist/gestalt.css";
 
 const Login = props => {
+  const [userid, setUserid] = useState('')
+  const [password, setPassword] = useState('')
+
+
   return (
     <Modal
       accessibilityCloseLabel="close"
@@ -42,7 +46,9 @@ const Login = props => {
                 />
               </Box>
               <Box paddingX={1}>
-                <Button color="red" inline text="Login" />
+                <Button color="red" inline text="Login" 
+                  onClick={() => props.onHandlePost({userid, password})}
+                />
               </Box>
             </Box>
           </Box>
@@ -61,7 +67,7 @@ const Login = props => {
               </Label>
             </Column>
             <Column span={8}>
-              <TextField id="userid" onChange={() => undefined} />
+              <TextField id="userid" onChange={(e) => setUserid(e.value)} />
             </Column>
           </Box>
           <Divider />
@@ -74,7 +80,7 @@ const Login = props => {
               </Label>
             </Column>
             <Column span={8}>
-              <TextField id="password" onChange={() => undefined} />
+              <TextField type="password" id="password" onChange={(e) => setPassword(e.value)} />
             </Column>
           </Box>
           <Divider />
