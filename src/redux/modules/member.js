@@ -10,6 +10,8 @@ const STATUS = "STATUS";
 const STATUS_SUCCESS = "STATUS_SUCCESS";
 const STATUS_FAIL = "STATUS_FAIL";
 
+const LOGOUT = "LOGOUT";
+
 export function login() {
   return {
     type: LOGIN
@@ -47,6 +49,12 @@ export function checkFail(error) {
     type: STATUS_FAIL,
     error
   };
+}
+
+export function removeToken(){
+  return {
+    type: LOGOUT
+  }
 }
 
 // API action
@@ -136,12 +144,17 @@ function reducer(state=initialState, action) {
         status : {$set : "SUCCESS"},
         isLogged : {$set : true},
       })
-      case STATUS_FAIL:
-        return update(state, {
-        status : {$set : "FAIL"},
-        isLogged : {$set : false},
-        error: {$set:action.error}
-      })
+    case STATUS_FAIL:
+      return update(state, {
+      status : {$set : "FAIL"},
+      isLogged : {$set : false},
+      error: {$set:action.error}
+    })
+    case LOGOUT:
+      return update(state, {
+      status : {$set : "SUCCESS"},
+      isLogged : {$set : false},
+    })
     default:
       return state;
   }

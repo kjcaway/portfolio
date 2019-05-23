@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from "react-redux";
 import Menu from "../components/common/Menu";
 import * as memberActions from "../redux/modules/member";
+import Cookies from 'universal-cookie';
 
 class MenuContainer extends Component {
   constructor(props){
@@ -16,7 +17,9 @@ class MenuContainer extends Component {
   }
 
   handleLogout(){
-    return null;
+    const cookies = new Cookies();
+    cookies.remove('token');
+    return this.props.removeToken();
   }
 
   render() {
@@ -43,7 +46,10 @@ const mapDispatchToProps = (dispatch, props) => {
   return {
     checkToken: () => {
       return dispatch(memberActions.checkToken());
-    }
+    },
+    removeToken: () => {
+      return dispatch(memberActions.removeToken());
+    },
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(MenuContainer);
