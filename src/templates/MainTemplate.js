@@ -13,6 +13,7 @@ import ProjectsContainer from '../containers/ProjectsContainer';
 import WriteContainer from '../containers/WriteContainer';
 import LoginContainer from '../containers/LoginContainer';
 import MenuContainer from '../containers/MenuContainer';
+import ManageContainer from '../containers/ManageContainer';
 
 const MainTemplate = ({match}) => {
   const menu = _.defaultTo(match.params.menu,'aboutme')
@@ -24,6 +25,7 @@ const MainTemplate = ({match}) => {
       case 'skills' : return <SkillsContainer/>
       case 'projects' : return <ProjectsContainer/>
       case 'write' : return <WriteContainer/>
+      case 'manage' : return <ManageContainer/>
       default : return <IntroContainer/>
     }
   }

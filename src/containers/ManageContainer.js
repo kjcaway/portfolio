@@ -3,28 +3,33 @@ import { connect } from "react-redux";
 import * as contentActions from "../redux/modules/contents";
 import * as memberActions from "../redux/modules/member";
 
-import Write from '../components/write/Write';
+import Manage from '../components/manage/Manage';
 import Unauthorized from '../components/error/Unauthorized';
 
-class WriteContainer extends Component {
+class ManageContainer extends Component {
   constructor(props) {
     super(props);
 
     this.state = {};
   }
 
-  handlePost(contents){
-    return this.props.setContents(contents)
-      .then(() => {
-        console.log('write contents')
-      })
+  componentDidMount(props){
+    return this.props.getContents().then(() => {
+      console.log(this.props.contents)
+    })
+  }
+
+  handleAddClick(){
+    console.log('aa')
+    document.location = '/write';
   }
 
   render() {
     return (
       this.props.isLogged?
-      <Write 
-        onPost={this.handlePost.bind(this)}
+      <Manage 
+      data={this.props.contents.data}
+      onHandleAddClick={this.handleAddClick.bind(this)}
       />
       :
       <Unauthorized/>
@@ -41,8 +46,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
-    setContents: (contents) => {
-      return dispatch(contentActions.setContents(contents));
+    getContents: () => {
+      return dispatch(contentActions.getContents());
     },
     checkToken: () => {
       return dispatch(memberActions.checkToken());
@@ -50,4 +55,4 @@ const mapDispatchToProps = (dispatch, props) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(WriteContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(ManageContainer);
