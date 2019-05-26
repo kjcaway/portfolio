@@ -2,6 +2,7 @@ import React,  {Component} from 'react'
 import { connect } from "react-redux";
 import * as contentActions from "../redux/modules/contents";
 import Intro from '../components/intro/Intro';
+import Spinner from '../components/common/Spinner';
 
 class IntroContainer extends Component {
   constructor(props) {
@@ -17,7 +18,12 @@ class IntroContainer extends Component {
   }
 
   render() {
+    const status = this.props.contents.status;
+
     return (
+      (status === 'LOAD')?
+      <Spinner/>
+      :
       <Intro 
         data={this.props.contents.data}
       />

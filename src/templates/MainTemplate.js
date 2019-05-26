@@ -30,17 +30,6 @@ const MainTemplate = ({match}) => {
     }
   }
 
-  // const connectServer = () => {
-  //   console.log('execute connect server...');
-  //   fetch('/api/')
-  //   .then(res => res.json())
-  //   .then(data => console.log(data));
-  // }
-
-  // useEffect(() => {
-  //   connectServer();
-  // }, []);
-
   const activeModal = () => {
     setIsPopLogin(true);
   }
