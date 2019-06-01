@@ -2,6 +2,8 @@ import React,  {Component} from 'react'
 import { connect } from "react-redux";
 import * as contentActions from "../redux/modules/contents";
 import Skill from '../components/skill/Skill';
+import Spinner from '../components/common/Spinner';
+
 
 class SkillContainer extends Component {
 
@@ -12,7 +14,12 @@ class SkillContainer extends Component {
   }
 
   render() {
+    const status = this.props.contents.status;
+
     return (
+      (status === 'LOAD')?
+      <Spinner/>
+      :
       <Skill 
         data={this.props.contents.data}
       />

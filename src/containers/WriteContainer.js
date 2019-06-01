@@ -6,19 +6,34 @@ import * as memberActions from "../redux/modules/member";
 import Write from '../components/write/Write';
 import Unauthorized from '../components/error/Unauthorized';
 
+import Cookies from 'universal-cookie';
+import jwt from 'jsonwebtoken';
+import _ from 'lodash';
+
 class WriteContainer extends Component {
 
-  handlePost(contents){
-    return this.props.setContents(contents)
+  handlePost(data){
+    data = _.assign(data, {
+      writer: this.getUserName()
+    });
+
+    return this.props.setContents(data)
       .then(() => {
         console.log('write contents');
         document.location = '/manage';
       })
   }
 
+  getUserName(){
+    const cookies = new Cookies();
+    const decoded = jwt.decode(cookies.get('token'), {complete: true});
+    const name = _.defaultTo(decoded.payload.name,'Anonymous');
+
+    return name;
+  }
+
   render() {
     const viewYN = (this.props.status !== 'INIT' && this.props.status !== 'WAITING');
-
     return (
       viewYN &&
       (
