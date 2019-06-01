@@ -1,15 +1,18 @@
-This project is simple portfolio web application using React
+This project is simple portfolio web application using React.
 
 ## Using skills
 ### Front-end
 - react
 - redux (ducks-pattern [https://github.com/erikras/ducks-modular-redux](https://github.com/erikras/ducks-modular-redux))
 - gestalt(Web UI Framework for react)
+- axios
+
 
 ### Back-end
 - express
-- mysql
+- mysql(AWS RDS)
 - winston(logging)
+- jwt
 
 
 Go to my blog [http://basketdeveloper.tistory.com](http://basketdeveloper.tistory.com)
