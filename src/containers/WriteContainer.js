@@ -7,11 +7,6 @@ import Write from '../components/write/Write';
 import Unauthorized from '../components/error/Unauthorized';
 
 class WriteContainer extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {};
-  }
 
   handlePost(contents){
     return this.props.setContents(contents)
@@ -22,13 +17,19 @@ class WriteContainer extends Component {
   }
 
   render() {
+    const viewYN = (this.props.status !== 'INIT' && this.props.status !== 'WAITING');
+
     return (
-      this.props.isLogged?
-      <Write 
-        onPost={this.handlePost.bind(this)}
-      />
-      :
-      <Unauthorized/>
+      viewYN &&
+      (
+        this.props.isLogged?
+        <Write 
+          onPost={this.handlePost.bind(this)}
+        />
+        :
+        <Unauthorized/>
+
+      )
     )
   }
 }
@@ -37,6 +38,7 @@ const mapStateToProps = (state) => {
   return {
     contents: state.contents,
     isLogged : state.member.isLogged,
+    status : state.member.status,
   }
 };
 

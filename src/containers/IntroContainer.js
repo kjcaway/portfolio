@@ -5,11 +5,6 @@ import Intro from '../components/intro/Intro';
 import Spinner from '../components/common/Spinner';
 
 class IntroContainer extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {};
-  }
 
   componentDidMount(props){
     return this.props.getContents().then(() => {

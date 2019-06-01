@@ -4,11 +4,6 @@ import Login from "../components/login/Login";
 import * as memberActions from "../redux/modules/member";
 
 class LoginContainer extends Component {
-  constructor(props){
-    super(props);
-
-    this.state = {};
-  }
 
   handlePost(userinfo){
     return this.props.getToken(userinfo)

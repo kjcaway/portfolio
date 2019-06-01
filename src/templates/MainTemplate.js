@@ -34,7 +34,7 @@ const MainTemplate = ({match}) => {
     setIsPopLogin(true);
   }
 
-  const deactiveModal = () => {
+  const inActiveModal = () => {
     setIsPopLogin(false);
   }
 
@@ -56,7 +56,7 @@ const MainTemplate = ({match}) => {
         </Box>
         <Footer/>
       </Box>
-      {isPopLogin && <LoginContainer onHandleClose={() => deactiveModal()}/>}
+      {isPopLogin && <LoginContainer onHandleClose={() => inActiveModal()}/>}
     </Box>
   );
 };

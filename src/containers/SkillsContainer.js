@@ -4,11 +4,6 @@ import * as contentActions from "../redux/modules/contents";
 import Skill from '../components/skill/Skill';
 
 class SkillContainer extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {};
-  }
 
   componentDidMount(props){
     return this.props.getContents().then(() => {

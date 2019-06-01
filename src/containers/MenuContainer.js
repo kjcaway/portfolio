@@ -5,11 +5,6 @@ import * as memberActions from "../redux/modules/member";
 import Cookies from 'universal-cookie';
 
 class MenuContainer extends Component {
-  constructor(props){
-    super(props);
-
-    this.state = {};
-  }
 
   componentDidMount(props){
     this.loadMenu();

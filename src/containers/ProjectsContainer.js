@@ -4,11 +4,6 @@ import * as contentActions from "../redux/modules/contents";
 import Projects from '../components/projects/Projects';
 
 class ProjectsContainer extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {};
-  }
 
   componentDidMount(props){
     return this.props.getContents().then(() => {

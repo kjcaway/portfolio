@@ -7,11 +7,6 @@ import Manage from '../components/manage/Manage';
 import Unauthorized from '../components/error/Unauthorized';
 
 class ManageContainer extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {};
-  }
 
   componentDidMount(props){
     this.loadContents();
@@ -35,15 +30,20 @@ class ManageContainer extends Component {
   }
 
   render() {
+    const viewYN = (this.props.status !== 'INIT' && this.props.status !== 'WAITING');
+    
     return (
-      this.props.isLogged?
-      <Manage 
-      data={this.props.contents.data}
-      onHandleAddClick={this.handleAddClick.bind(this)}
-      onHandleDeleteClick={this.handleDeleteClick.bind(this)}
-      />
-      :
-      <Unauthorized/>
+      viewYN &&
+      (
+        this.props.isLogged?
+        <Manage 
+        data={this.props.contents.data}
+        onHandleAddClick={this.handleAddClick.bind(this)}
+        onHandleDeleteClick={this.handleDeleteClick.bind(this)}
+        />
+        :
+        <Unauthorized/>
+      )
     )
   }
 }
@@ -52,6 +52,7 @@ const mapStateToProps = (state) => {
   return {
     contents: state.contents,
     isLogged : state.member.isLogged,
+    status : state.member.status,
   }
 };
 
