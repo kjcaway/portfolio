@@ -7,6 +7,7 @@ const SUCCESS = "contents/SUCCESS";
 const FAIL = "contents/FAIL";
 
 const CREATE = "contents/CREATE";
+const DELETE = "contents/DELETE";
 
 export function loadContents(data) {
   return {
@@ -34,6 +35,12 @@ export function createContents() {
   };
 }
 
+export function removeContent(seq) {
+  return {
+    type: DELETE,
+  };
+}
+
 // API action
 export function getContents(){
   return dispatch => {
@@ -54,10 +61,23 @@ export function getContents(){
 export function setContents(contents){
   return dispatch => {
     dispatch(createContents());
-    console.log(contents)
     return axios.post('/api/contents/', contents)
       .then(res => {
         console.log('[action] setContents...');
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+}
+
+export function delContents(seq){
+  return dispatch => {
+    dispatch(removeContent(seq));
+    console.log(seq)
+    return axios.delete(`/api/contents/${seq}`)
+      .then(res => {
+        console.log('[action] delContents...');
       })
       .catch(err => {
         console.log(err);
@@ -91,6 +111,10 @@ function reducer(state=initialState, action) {
     case CREATE:
       return update(state, {
         status : {$set : "CREATE"},
+      })
+    case DELETE:
+      return update(state, {
+        status : {$set : "DELETE"},
       })
     default:
       return state;

@@ -16,7 +16,8 @@ class WriteContainer extends Component {
   handlePost(contents){
     return this.props.setContents(contents)
       .then(() => {
-        console.log('write contents')
+        console.log('write contents');
+        document.location = '/manage';
       })
   }
 

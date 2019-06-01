@@ -13,6 +13,10 @@ const Menu = (props) => {
       {menu:'projects', link:'/projects', name:'Projects'}
     ];
 
+    if(props.isLogged){
+      arr.push({menu:'manage', link:'/manage', name:'Manage'})
+    }
+    
     return arr.map((obj,idx) => {
       const active = (obj.menu === props.active?true:false)
       return (

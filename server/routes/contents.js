@@ -68,7 +68,7 @@ router.post("/", (req, res, next) => {
  * Method : DELETE
  * CONTENT 삭제 
  */
-router.delete("/remove/:seq", (req, res, next) => {
+router.delete("/:seq", (req, res, next) => {
   db((err, connection) => {
     let query = connection.query("DELETE FROM CONTENTS WHERE SEQ = ?", req.params.seq, (err, results, fields) => {
       connection.release();

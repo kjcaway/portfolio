@@ -14,14 +14,24 @@ class ManageContainer extends Component {
   }
 
   componentDidMount(props){
+    this.loadContents();
+  }
+
+  loadContents(){
     return this.props.getContents().then(() => {
       console.log(this.props.contents)
     })
   }
 
   handleAddClick(){
-    console.log('aa')
     document.location = '/write';
+  }
+
+  handleDeleteClick(seq){
+    return this.props.delContents(seq).then(() => {
+      console.log(`Delete content seq : ${seq}`);
+      this.loadContents();
+    })
   }
 
   render() {
@@ -30,6 +40,7 @@ class ManageContainer extends Component {
       <Manage 
       data={this.props.contents.data}
       onHandleAddClick={this.handleAddClick.bind(this)}
+      onHandleDeleteClick={this.handleDeleteClick.bind(this)}
       />
       :
       <Unauthorized/>
@@ -51,6 +62,9 @@ const mapDispatchToProps = (dispatch, props) => {
     },
     checkToken: () => {
       return dispatch(memberActions.checkToken());
+    },
+    delContents: (seq) => {
+      return dispatch(contentActions.delContents(seq));
     },
   };
 };

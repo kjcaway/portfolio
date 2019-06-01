@@ -6,9 +6,9 @@ const Manage = props => {
 
   const convertCtgToMenu = (code) => {
     switch(code){
-      case '00' : return 'AboutMe';
-      case '01' : return 'SKills';
-      case '02' : return 'Projects';
+      case '01' : return 'AboutMe';
+      case '02' : return 'Skills';
+      case '03' : return 'Projects';
       default : return 'None'
     }
   }
@@ -34,7 +34,7 @@ const Manage = props => {
             <Text>{obj.contents}</Text>
           </Box>
           <Box paddingX={1}>
-            <Button text="Delete" size="sm" color="red" />
+            <Button text="Delete" size="sm" color="red" onClick={() => props.onHandleDeleteClick(obj.seq)}/>
           </Box>
         </Box>
       );

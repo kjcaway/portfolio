@@ -12,6 +12,10 @@ class MenuContainer extends Component {
   }
 
   componentDidMount(props){
+    this.loadMenu();
+  }
+
+  loadMenu(){
     return this.props.checkToken().then(() => {
     })
   }
