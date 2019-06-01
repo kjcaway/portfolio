@@ -14,12 +14,13 @@ const router = express.Router();
 router.get("/", (req, res, next) => {
   let where = '';
 
-  if('where' in req.body){
-    _.forIn(req.body.where, (value, key) => {
-      let term = ` AND ${key} = "${value}"`;
-      where += term
-    });
-  }
+  const qWhere = req.query.where;
+  const toJson = JSON.parse(qWhere);
+
+  _.forIn(toJson, (value, key) => {
+    let term = ` AND ${key} = "${value}"`;
+    where += term
+  });
 
   db((err, connection) => {
     let query = connection.query("SELECT * FROM CONTENTS WHERE 1=1" + where + " ORDER BY date_write DESC", (err, rows) => {

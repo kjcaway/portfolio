@@ -15,7 +15,7 @@ const Write = (props) => {
   const [title, setTitle] = useState('');
   const [contents, setContents] = useState('');
   const [url_link, setUrl_link] = useState('');
-  const [category, setCategory] = useState('00');
+  const [category, setCategory] = useState('01');
 
   const categoryOptions = [
     {
@@ -95,7 +95,6 @@ const Write = (props) => {
                 contents: contents,
                 url_link: url_link,
                 category: category,
-                writer:'조태호'
               });
             }}
           />

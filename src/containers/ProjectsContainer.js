@@ -6,7 +6,9 @@ import Projects from '../components/projects/Projects';
 class ProjectsContainer extends Component {
 
   componentDidMount(props){
-    return this.props.getContents().then(() => {
+    return this.props.getContents({
+      category:'03',
+    }).then(() => {
       console.log(this.props.contents)
     })
   }
@@ -28,8 +30,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
-    getContents: () => {
-      return dispatch(contentActions.getContents());
+    getContents: (where) => {
+      return dispatch(contentActions.getContents(where));
     }
   };
 };
