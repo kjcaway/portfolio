@@ -6,12 +6,11 @@ import _ from 'lodash'
 import Header from "./components/common/Header";
 import Footer from "./components/common/Footer";
 
-
 import LoginContainer from './containers/LoginContainer';
 import MenuContainer from './containers/MenuContainer';
 import Routing from "./Routing";
 
-const App = ({match}) => {
+const App = () => {
   const [isPopLogin, setIsPopLogin] = useState(false);
 
   const activeModal = () => {
