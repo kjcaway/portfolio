@@ -8,7 +8,7 @@ const Menu = (props) => {
 
   const memuItems = () => {
     const arr = [
-      {menu:'aboutme', link:'/', name:'About Me'},
+      {menu:'aboutme', link:'/intro', name:'About Me'},
       {menu:'skills', link:'/skills', name:'Skills'},
       {menu:'projects', link:'/projects', name:'Projects'}
     ];

@@ -19,7 +19,7 @@ class ManageContainer extends Component {
   }
 
   handleAddClick(){
-    document.location = '/write';
+    document.location = '/manage/write';
   }
 
   handleDeleteClick(seq){
