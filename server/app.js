@@ -1,10 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+const cors = require('cors');
 const api = require('./routes/index');
 const logger = require('./logger')
 
 app.use(bodyParser.json());
+app.use(cors());
 app.use('/api', api);
 
 // set the secret key variable for jwt

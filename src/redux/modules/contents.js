@@ -87,9 +87,11 @@ export function delContents(seq) {
       .delete(`/api/contents/${seq}`)
       .then(res => {
         console.log("[action] delContents...");
+        dispatch(success());
       })
       .catch(err => {
         console.log(err);
+        dispatch(fail());
       });
   };
 }

@@ -4,8 +4,20 @@ const schema = require('../schemas/schemaContents')
 const logger = require('../logger');
 const _ = require('lodash');
 const moment = require('moment');
+const multer = require('multer');
 
 const router = express.Router();
+
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, "uploads");
+  },
+  filename: function(req, file, cb) {
+    cb(null, moment().format('YYYYMMDDHHmmss') + "_" + file.originalname);
+  }
+});
+
+const upload = multer({ storage: storage }).single("file");
 
 /**
  * Method : GET
@@ -41,28 +53,37 @@ router.get("/", (req, res, next) => {
  * CONTENTS 입력
  */
 router.post("/", (req, res, next) => {
-  const validError = schema.validate(req.body);
-  if(validError.length > 0){
-    logger.error("invalid request, " + validError[0].message)
-    return res.status(400).json({'error': 1, 'message' :validError[0].message})
-  }
+  // const validError = schema.validate(req.body);
+  // if(validError.length > 0){
+  //   logger.error("invalid request, " + validError[0].message)
+  //   return res.status(400).json({'error': 1, 'message' :validError[0].message})
+  // }
 
-  db((err, connection) => {
-    let data = _.assign(req.body, {
-      date_write: moment().format('YYYY-MM-DD HH:mm:ss')
-    })
-    
-    let query =connection.query("INSERT INTO CONTENTS SET ?", data, (err, results, fields) => {
-      connection.release();
-      if (err) {
-        return next(err);
-      }
+  upload(req, res, function(err) {
+    if (err instanceof multer.MulterError) {
+      return next(err);
+    } else if (err) {
+      return next(err);
+    }
 
-      return res.json({ results: results });
+    db((err, connection) => {
+      let data = _.assign(req.body, {
+        date_write: moment().format('YYYY-MM-DD HH:mm:ss')
+      })
+      
+      let query =connection.query("INSERT INTO CONTENTS SET ?", data, (err, results, fields) => {
+        connection.release();
+        if (err) {
+          return next(err);
+        }
+  
+        return res.json({ results: results });
+      });
+  
+      logger.debug('Execute query.\n\n\t\t' + query.sql + '\n');
     });
-
-    logger.debug('Execute query.\n\n\t\t' + query.sql + '\n');
   });
+
 });
 
 /**

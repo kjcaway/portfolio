@@ -24,8 +24,14 @@ class ManageContainer extends Component {
 
   handleDeleteClick(seq){
     return this.props.delContents(seq).then(() => {
-      console.log(`Delete content seq : ${seq}`);
-      this.loadContents();
+      if(this.props.isSuccess === 'SUCCESS'){
+        console.log(`Delete content seq : ${seq}`);
+        alert('Success');
+        this.loadContents();
+      }else{
+        alert('Fail')
+      }
+
     })
   }
 
@@ -53,6 +59,7 @@ const mapStateToProps = (state) => {
     contents: state.contents,
     isLogged : state.member.isLogged,
     status : state.member.status,
+    isSuccess: state.contents.status
   }
 };
 
