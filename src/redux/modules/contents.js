@@ -70,9 +70,11 @@ export function setContents(contents) {
       .post("/api/contents/", contents)
       .then(res => {
         console.log("[action] setContents...");
+        dispatch(success());
       })
       .catch(err => {
         console.log(err);
+        dispatch(fail()); 
       });
   };
 }

@@ -32,8 +32,11 @@ class WriteContainer extends Component {
 
     return this.props.setContents(formData)
       .then(() => {
-        console.log('write contents');
-        document.location = '/manage';
+        if(this.props.isSuccess === 'SUCCESS'){
+          document.location = '/manage';
+        } else{
+          alert('Fail.')
+        }
       })
   }
 
@@ -74,6 +77,7 @@ class WriteContainer extends Component {
 const mapStateToProps = (state) => {
   return {
     contents: state.contents,
+    isSuccess: state.contents.status,
     isLogged : state.member.isLogged,
     status : state.member.status,
   }
