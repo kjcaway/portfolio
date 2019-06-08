@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import * as contentActions from "../redux/modules/contents";
 import * as memberActions from "../redux/modules/member";
 
-import Write from '../components/write/Write';
+import Write from '../components/manage/Write';
 import Unauthorized from '../components/error/Unauthorized';
 
 import Cookies from 'universal-cookie';
