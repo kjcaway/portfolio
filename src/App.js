@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import { Box } from "gestalt";
 import "gestalt/dist/gestalt.css";
-import _ from 'lodash'
 
 import Header from "./components/common/Header";
 import Footer from "./components/common/Footer";

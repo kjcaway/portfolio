@@ -11,17 +11,38 @@ import jwt from 'jsonwebtoken';
 import _ from 'lodash';
 
 class WriteContainer extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      selectedFile: null,
+    }
+  }
 
   handlePost(data){
-    data = _.assign(data, {
-      writer: this.getUserName()
-    });
+    // data = _.assign(data, {
+    //   writer: this.getUserName()
+    // });
+    const formData = new FormData();
+    formData.append('file', this.state.selectedFile);
+    formData.append('title', data.title);
+    formData.append('contents', data.contents);
+    formData.append('url_link', data.url_link);
+    formData.append('category', data.category);
+    formData.append('writer', this.getUserName());
 
-    return this.props.setContents(data)
+    return this.props.setContents(formData)
       .then(() => {
         console.log('write contents');
         document.location = '/manage';
       })
+  }
+
+  handleFileInput(e){
+    console.log(e.target.files[0])
+    this.setState({
+      selectedFile : e.target.files[0],
+      loaded:0
+    })
   }
 
   getUserName(){
@@ -40,6 +61,7 @@ class WriteContainer extends Component {
         this.props.isLogged?
         <Write 
           onPost={this.handlePost.bind(this)}
+          onHandleFileInput={this.handleFileInput.bind(this)}
         />
         :
         <Unauthorized/>
