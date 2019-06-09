@@ -44,6 +44,9 @@ router.get("/", (req, res, next) => {
  * CONTENTS 입력
  */
 router.post("/", (req, res, next) => {
+  // FormData의 경우 req로 부터 데이터를 얻을수 없다.
+  // upload 핸들러(multer)를 통해서 데이터를 읽을 수 있다
+  
   upload(req, res, function(err) {
     if (err instanceof multer.MulterError) {
       return next(err);
