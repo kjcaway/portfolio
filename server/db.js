@@ -2,7 +2,7 @@ const mysql = require("mysql");
 const config = require("./config/config");
 const logger = require('./logger');
 
-const pool = mysql.createPool(config);
+const pool = mysql.createPool(config.mysql);
 logger.info('Connection pool created.');
 
 pool.on('acquire', function (connection) {

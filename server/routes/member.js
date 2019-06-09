@@ -1,7 +1,7 @@
 const express = require("express");
 const db = require("../db");
 const jwt = require('jsonwebtoken')
-const jwtConfig = require('../config/jwt')
+const config = require('../config/config')
 const _ = require('lodash');
 
 const router = express.Router();
@@ -52,9 +52,9 @@ router.post("/signin", (req, res) => {
                 name: user.name,
                 email: user.email
             }, 
-            jwtConfig.secret, 
+            config.jwt.secret, 
             {
-                expiresIn: jwtConfig.expire,
+                expiresIn: config.jwt.expire,
                 subject: 'userInfo'
             });
           res.cookie("token", token);
@@ -76,7 +76,7 @@ router.post("/signin", (req, res) => {
  */
 router.get("/check", (req, res) => {
   const token = req.headers['x-access-token'] || req.query.token
-  const decodedToken = jwt.verify(token, jwtConfig.secret);
+  const decodedToken = jwt.verify(token, config.jwt.secret);
 
   if(decodedToken){
     return res.json({data: 'Valid token'});
