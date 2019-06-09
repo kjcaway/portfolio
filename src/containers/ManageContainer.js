@@ -5,6 +5,7 @@ import * as memberActions from "../redux/modules/member";
 
 import Manage from '../components/manage/Manage';
 import Unauthorized from '../components/error/Unauthorized';
+import Spinner from '../components/common/Spinner';
 
 class ManageContainer extends Component {
 
@@ -24,7 +25,7 @@ class ManageContainer extends Component {
 
   handleDeleteClick(seq){
     return this.props.delContents(seq).then(() => {
-      if(this.props.isSuccess === 'SUCCESS'){
+      if(this.props.contentsStatus === 'SUCCESS'){
         console.log(`Delete content seq : ${seq}`);
         alert('Success');
         this.loadContents();
@@ -36,17 +37,22 @@ class ManageContainer extends Component {
   }
 
   render() {
-    const viewYN = (this.props.status !== 'INIT' && this.props.status !== 'WAITING');
-    
+    const viewYN = (this.props.memberStatus !== 'INIT' && this.props.memberStatus !== 'WAITING');
+
     return (
       viewYN &&
       (
         this.props.isLogged?
-        <Manage 
-        data={this.props.contents.data}
-        onHandleAddClick={this.handleAddClick.bind(this)}
-        onHandleDeleteClick={this.handleDeleteClick.bind(this)}
-        />
+        (
+          (this.props.contentsStatus === 'LOAD')?
+          <Spinner/>
+          :
+          <Manage 
+          data={this.props.contentsData}
+          onHandleAddClick={this.handleAddClick.bind(this)}
+          onHandleDeleteClick={this.handleDeleteClick.bind(this)}
+          />
+        )
         :
         <Unauthorized/>
       )
@@ -56,10 +62,10 @@ class ManageContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    contents: state.contents,
+    contentsData: state.contents.data,
+    contentsStatus: state.contents.status,
     isLogged : state.member.isLogged,
-    status : state.member.status,
-    isSuccess: state.contents.status
+    memberStatus : state.member.status,
   }
 };
 

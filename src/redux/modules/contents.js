@@ -2,12 +2,18 @@ import axios from "axios";
 import update from "react-addons-update";
 
 // Action
-const LOAD = "contents/LOAD";
-const SUCCESS = "contents/SUCCESS";
-const FAIL = "contents/FAIL";
+const LOAD = "LOAD";
+const SUCCESS = "SUCCESS";
+const FAIL = "FAIL";
 
-const CREATE = "contents/CREATE";
-const DELETE = "contents/DELETE";
+const CREATE = "CREATE";
+const CREATE_SUCCESS = "CREATE_SUCCESS";
+const CREATE_FAIL = "CREATE_FAIL";
+
+const DELETE = "DELETE";
+const DELETE_SUCCESS = "DELETE_SUCCESS";
+const DELETE_FAIL = "DELETE_FAIL";
+
 
 export function loadContents(data) {
   return {
@@ -34,10 +40,33 @@ export function createContents() {
     type: CREATE
   };
 }
+export function createSuccess() {
+  return {
+    type: CREATE_SUCCESS,
+  };
+}
 
+export function createFail(error) {
+  return {
+    type: CREATE_FAIL,
+    error
+  };
+}
 export function removeContent(seq) {
   return {
     type: DELETE
+  };
+}
+export function removeSuccess() {
+  return {
+    type: DELETE_SUCCESS,
+  };
+}
+
+export function removeFail(error) {
+  return {
+    type: DELETE_FAIL,
+    error
   };
 }
 
@@ -70,11 +99,11 @@ export function setContents(contents) {
       .post("/api/contents/", contents)
       .then(res => {
         console.log("[action] setContents...");
-        dispatch(success());
+        dispatch(createSuccess());
       })
       .catch(err => {
         console.log(err);
-        dispatch(fail()); 
+        dispatch(createFail()); 
       });
   };
 }
@@ -87,11 +116,11 @@ export function delContents(seq) {
       .delete(`/api/contents/${seq}`)
       .then(res => {
         console.log("[action] delContents...");
-        dispatch(success());
+        dispatch(removeSuccess());
       })
       .catch(err => {
         console.log(err);
-        dispatch(fail());
+        dispatch(removeFail());
       });
   };
 }
@@ -123,9 +152,27 @@ function reducer(state = initialState, action) {
       return update(state, {
         status: { $set: "CREATE" }
       });
+    case CREATE_SUCCESS:
+      return update(state, {
+        status: { $set: "SUCCESS" }
+      });
+    case CREATE_FAIL:
+      return update(state, {
+        status: { $set: "FAIL" },
+        error: { $set: action.err }
+      });
     case DELETE:
       return update(state, {
         status: { $set: "DELETE" }
+      });
+    case DELETE_SUCCESS:
+      return update(state, {
+        status: { $set: "SUCCESS" }
+      });
+    case DELETE_FAIL:
+      return update(state, {
+        status: { $set: "FAIL" },
+        error: { $set: action.err }
       });
     default:
       return state;

@@ -11,19 +11,17 @@ class SkillContainer extends Component {
     return this.props.getContents({
       category:'02',
     }).then(() => {
-      console.log(this.props.contents)
     })
   }
 
   render() {
-    const status = this.props.contents.status;
 
     return (
-      (status === 'LOAD')?
+      (this.props.contentsStatus === 'LOAD')?
       <Spinner/>
       :
       <Skill 
-        data={this.props.contents.data}
+        data={this.props.contentsData}
       />
     )
   }
@@ -31,7 +29,8 @@ class SkillContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    contents: state.contents
+    contentsData: state.contents.data,
+    contentsStatus: state.contents.status
   }
 };
 

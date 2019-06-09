@@ -10,19 +10,17 @@ class IntroContainer extends Component {
     return this.props.getContents({
       category:'01',
     }).then(() => {
-      console.log(this.props.contents)
     })
   }
 
   render() {
-    const status = this.props.contents.status;
 
     return (
-      (status === 'LOAD')?
+      (this.props.contentsStatus === 'LOAD')?
       <Spinner/>
       :
       <Intro 
-        data={this.props.contents.data}
+        data={this.props.contentsData}
       />
     )
   }
@@ -30,7 +28,8 @@ class IntroContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    contents: state.contents
+    contentsData: state.contents.data,
+    contentsStatus: state.contents.status
   }
 };
 

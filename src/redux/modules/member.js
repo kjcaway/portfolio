@@ -6,9 +6,9 @@ const LOGIN = "LOGIN";
 const SUCCESS = "SUCCESS";
 const FAIL = "FAIL";
 
-const STATUS = "STATUS";
-const STATUS_SUCCESS = "STATUS_SUCCESS";
-const STATUS_FAIL = "STATUS_FAIL";
+const CHECK = "CHECK";
+const CHECK_SUCCESS = "CHECK_SUCCESS";
+const CHECK_FAIL = "CHECK_FAIL";
 
 const LOGOUT = "LOGOUT";
 
@@ -34,19 +34,19 @@ export function fail(error) {
 
 export function check() {
   return {
-    type: STATUS
+    type: CHECK
   };
 }
 
 export function checkSuccess() {
   return {
-    type: STATUS_SUCCESS
+    type: CHECK_SUCCESS
   };
 }
 
 export function checkFail(error) {
   return {
-    type: STATUS_FAIL,
+    type: CHECK_FAIL,
     error
   };
 }
@@ -135,16 +135,16 @@ function reducer(state=initialState, action) {
         status : {$set : "FAIL"},
         error: {$set:action.error}
       })
-    case STATUS:
+    case CHECK:
       return update(state, {
         status : {$set : "WAITING"},
       })
-    case STATUS_SUCCESS:
+    case CHECK_SUCCESS:
       return update(state, {
         status : {$set : "SUCCESS"},
         isLogged : {$set : true},
       })
-    case STATUS_FAIL:
+    case CHECK_FAIL:
       return update(state, {
       status : {$set : "FAIL"},
       isLogged : {$set : false},
