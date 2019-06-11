@@ -53,7 +53,7 @@ router.post("/", (req, res, next) => {
     } else if (err) {
       return next(err);
     }
-
+    
     const validError = schema.validate(req.body);
     if(validError.length > 0){
       logger.error("invalid request, " + validError[0].message)
@@ -62,7 +62,11 @@ router.post("/", (req, res, next) => {
 
     db((err, connection) => {
       let data = _.assign(req.body, {
-        date_write: moment().format('YYYY-MM-DD HH:mm:ss')
+        date_write: moment().format('YYYY-MM-DD HH:mm:ss'),
+        file_origin: _.get(req, 'file.originalname', null),
+        file_name: _.get(req, 'file.filename', null),
+        file_path: _.get(req, 'file.path', null),
+        file_size: _.get(req, 'file.size', null),
       })
       let query =connection.query("INSERT INTO CONTENTS SET ?", data, (err, results, fields) => {
         connection.release();
