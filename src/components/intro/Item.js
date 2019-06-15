@@ -32,7 +32,7 @@ const Item = (props) => {
             onClick={() => onClick(props)}
           />
         </Card>
-        <Box padding={4}>
+        <Box padding={4} maxWidth={650}>
           <Heading size="sm" color="gray">
             {props.data.title}
           </Heading>
@@ -45,7 +45,7 @@ const Item = (props) => {
   const rightView = () => {
     return (
       <Box display="flex" paddingY={4} alignItems="center" direction="row">
-        <Box padding={4} flex="grow">
+        <Box padding={4} flex="grow" maxWidth={650}>
           <Heading size="sm" color="gray">
           {props.data.title}
           </Heading>
