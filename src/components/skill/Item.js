@@ -14,8 +14,7 @@ const Item = (props) => {
       <Avatar
         name="Shanice"
         size="lg"
-        src="/gestalt/static/media/shanice.2bbdc6c0.jpg"
-        verified
+        src={props.data.file_path}
       />
       <Text bold size='lg' italic>{props.data.title}</Text>
       <Text size='md'>{props.data.contents}</Text>

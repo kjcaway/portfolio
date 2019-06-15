@@ -19,7 +19,7 @@ const Item = (props) => {
   const leftView = () => {
     return (
       <Box display="flex" paddingY={4} alignItems="center" direction="row">
-        <Card image={<Avatar name="avatar" />}>
+        <Card image={<Avatar name="avatar" src={props.data.file_path}/>}>
           <Text align="center" bold size="xl">
             <Box paddingX={3} paddingY={2}>
               {props.data.writer}
@@ -51,7 +51,7 @@ const Item = (props) => {
           </Heading>
           <Text>{props.data.contents}</Text>
         </Box>
-        <Card image={<Avatar name="Jongchan Kang" />}>
+        <Card image={<Avatar name="Jongchan Kang" src={props.data.file_path}/>}>
           <Text align="center" bold size="xl">
             <Box paddingX={3} paddingY={2}>
             {props.data.writer}

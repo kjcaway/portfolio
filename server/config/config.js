@@ -14,6 +14,12 @@ const config = {
   file: {
     rootPath : '/',
     uploadPath : 'path'
+  },
+  s3: {
+    accessKeyId: 'accesskeyid',
+    secretAccessKey: 'secretkey',
+    region: 'ap-northeast-2',
+    bucketName: 'bucketname'
   }
 };
 
