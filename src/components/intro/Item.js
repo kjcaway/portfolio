@@ -19,20 +19,22 @@ const Item = (props) => {
   const leftView = () => {
     return (
       <Box display="flex" paddingY={4} alignItems="center" direction="row">
-        <Card image={<Avatar name="avatar" src={props.data.file_path}/>}>
-          <Text align="center" bold size="xl">
-            <Box paddingX={3} paddingY={2}>
-              {props.data.writer}
-            </Box>
-          </Text>
-          <Button
-            accessibilityLabel="Go to Blog"
-            color="red"
-            text="Go to Blog"
-            onClick={() => onClick(props)}
-          />
-        </Card>
-        <Box padding={4} maxWidth={650}>
+        <Box column={2}>
+          <Card image={<Avatar name="avatar" src={props.data.file_path}/>}>
+            <Text align="center" bold size="xl">
+              <Box paddingX={3} paddingY={2}>
+                {props.data.writer}
+              </Box>
+            </Text>
+            <Button
+              accessibilityLabel="Go to Blog"
+              color="red"
+              text="Go to Blog"
+              onClick={() => onClick(props)}
+            />
+          </Card>
+        </Box>
+        <Box padding={4} maxWidth={650} column={8}>
           <Heading size="sm" color="gray">
             {props.data.title}
           </Heading>
@@ -45,25 +47,27 @@ const Item = (props) => {
   const rightView = () => {
     return (
       <Box display="flex" paddingY={4} alignItems="center" direction="row">
-        <Box padding={4} flex="grow" maxWidth={650}>
+        <Box padding={4} flex="grow" maxWidth={650} column={8}>
           <Heading size="sm" color="gray">
           {props.data.title}
           </Heading>
           <Text>{props.data.contents}</Text>
         </Box>
-        <Card image={<Avatar name="Jongchan Kang" src={props.data.file_path}/>}>
-          <Text align="center" bold size="xl">
-            <Box paddingX={3} paddingY={2}>
-            {props.data.writer}
-            </Box>
-          </Text>
-          <Button
-            accessibilityLabel="Go to Blog"
-            color="red"
-            text="Go to Blog"
-            onClick={() => onClick(props)}
-          />
-        </Card>
+        <Box column={2}>
+          <Card image={<Avatar name="Jongchan Kang" src={props.data.file_path}/>}>
+            <Text align="center" bold size="xl">
+              <Box paddingX={3} paddingY={2}>
+              {props.data.writer}
+              </Box>
+            </Text>
+            <Button
+              accessibilityLabel="Go to Blog"
+              color="red"
+              text="Go to Blog"
+              onClick={() => onClick(props)}
+            />
+          </Card>
+        </Box>
       </Box>
     )
   }
