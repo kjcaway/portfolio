@@ -13,6 +13,7 @@ This project is simple portfolio web application using React.
 - mysql(AWS RDS)
 - winston(logging)
 - jwt
+- storage(AWS S3)
 
 
 Go to my blog [http://basketdeveloper.tistory.com](http://basketdeveloper.tistory.com)
