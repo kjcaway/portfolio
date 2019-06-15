@@ -34,6 +34,9 @@ const Manage = props => {
             <Text>{obj.contents}</Text>
           </Box>
           <Box paddingX={1}>
+            <Button text="Modify" size="sm" color="gray" onClick={() => props.onHandleModifyClick(obj.seq)}/>
+          </Box>
+          <Box paddingX={1}>
             <Button text="Delete" size="sm" color="red" onClick={() => props.onHandleDeleteClick(obj.seq)}/>
           </Box>
         </Box>
