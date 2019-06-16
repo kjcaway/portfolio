@@ -14,10 +14,10 @@ import {
 import "gestalt/dist/gestalt.css";
 
 const Modify = props => {
-  const [title, setTitle] = useState("");
-  const [contents, setContents] = useState("");
-  const [url_link, setUrl_link] = useState("");
-  const [category, setCategory] = useState("01");
+  const [title, setTitle] = useState(props.data.title);
+  const [contents, setContents] = useState(props.data.contents);
+  const [url_link, setUrl_link] = useState(props.data.url_link);
+  const [category, setCategory] = useState(props.data.category);
 
   const categoryOptions = [
     {
@@ -91,6 +91,7 @@ const Modify = props => {
                 onChange={e => {
                   setTitle(e.value);
                 }}
+                value={title}
               />
             </Column>
           </Box>
@@ -109,6 +110,7 @@ const Modify = props => {
                 onChange={e => {
                   setContents(e.value);
                 }}
+                value={contents}
               />
             </Column>
           </Box>
@@ -127,6 +129,7 @@ const Modify = props => {
                 onChange={e => {
                   setUrl_link(e.value);
                 }}
+                value={url_link}
               />
             </Column>
           </Box>

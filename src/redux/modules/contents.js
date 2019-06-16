@@ -14,6 +14,9 @@ const DELETE = "DELETE";
 const DELETE_SUCCESS = "DELETE_SUCCESS";
 const DELETE_FAIL = "DELETE_FAIL";
 
+const LOAD_ONE = "LOAD_ONE";
+const LOAD_ONE_SUCCESS = "LOAD_ONE_SUCCESS";
+const LOAD_ONE_FAIL = "LOAD_ONE_FAIL";
 
 export function loadContents(data) {
   return {
@@ -42,7 +45,7 @@ export function createContents() {
 }
 export function createSuccess() {
   return {
-    type: CREATE_SUCCESS,
+    type: CREATE_SUCCESS
   };
 }
 
@@ -59,7 +62,7 @@ export function removeContent(seq) {
 }
 export function removeSuccess() {
   return {
-    type: DELETE_SUCCESS,
+    type: DELETE_SUCCESS
   };
 }
 
@@ -70,6 +73,25 @@ export function removeFail(error) {
   };
 }
 
+export function loadContentOne(data) {
+  return {
+    type: LOAD_ONE
+  };
+}
+
+export function loadContentOneSuccess(data) {
+  return {
+    type: LOAD_ONE_SUCCESS,
+    data
+  };
+}
+
+export function loadContentOneFail(error) {
+  return {
+    type: LOAD_ONE_FAIL,
+    error
+  };
+}
 // API action
 export function getContents(where = {}) {
   return dispatch => {
@@ -103,7 +125,7 @@ export function setContents(contents) {
       })
       .catch(err => {
         console.log(err);
-        dispatch(createFail()); 
+        dispatch(createFail());
       });
   };
 }
@@ -125,11 +147,37 @@ export function delContents(seq) {
   };
 }
 
+export function getContent(where = {}) {
+  return dispatch => {
+    dispatch(loadContentOne());
+
+    return axios
+      .get("/api/contents/", {
+        params: {
+          where: where
+        }
+      })
+      .then(res => {
+        console.log("[action] getContent...");
+        if (res.data.data.length === 1) {
+          dispatch(loadContentOneSuccess(res.data.data[0])); // res.data는 {data : array}형태
+        } else {
+          dispatch(loadContentOneFail(res.err));
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        dispatch(loadContentOneFail(err));
+      });
+  };
+}
+
 // Reducer
 const initialState = {
   status: "INIT",
   data: [],
-  error: -1
+  error: -1,
+  dataOne: {}
 };
 
 function reducer(state = initialState, action) {
@@ -172,6 +220,20 @@ function reducer(state = initialState, action) {
     case DELETE_FAIL:
       return update(state, {
         status: { $set: "FAIL" },
+        error: { $set: action.err }
+      });
+    case LOAD_ONE:
+      return update(state, {
+        status: { $set: "LOAD_ONE" }
+      });
+    case LOAD_ONE_SUCCESS:
+      return update(state, {
+        status: { $set: "LOAD_ONE_SUCCESS" },
+        dataOne: { $set: action.data }
+      });
+    case LOAD_ONE_FAIL:
+      return update(state, {
+        status: { $set: "LOAD_ONE_FAIL" },
         error: { $set: action.err }
       });
     default:

@@ -48,7 +48,15 @@ class ManageContainer extends Component {
     this.setState(prevState => ({
       showModifyModal: !prevState.showModifyModal,
       modifyTargetSeq: seq
-    }));
+    }), this.updateUrl);
+  }
+
+  updateUrl(){
+    if(this.state.showModifyModal){
+      this.props.history.push(`/manage/${this.state.modifyTargetSeq}`)
+    } else{
+      this.props.history.push(`/manage`)
+    }
   }
 
   render() {

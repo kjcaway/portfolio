@@ -19,6 +19,7 @@ class Routing extends Component {
             <Route path="/skills" component={SkillsContainer}></Route>
             <Route path="/projects" component={ProjectsContainer}></Route>
             <Route exact path="/manage" component={ManageContainer}></Route>
+            <Route path="/manage/:seq" component={ManageContainer}></Route>
             <Route path="/manage/write" component={WriteContainer}></Route>
           </Switch>
         </Router>
