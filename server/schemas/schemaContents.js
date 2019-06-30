@@ -24,4 +24,10 @@ module.exports = new Schema({
     required : true,
     length: { max: 50 }
   },
+  seq: {
+    type: String,
+  },
+  is_del_file: {
+    type: String,
+  },
 });

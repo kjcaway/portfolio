@@ -19,9 +19,6 @@ class WriteContainer extends Component {
   }
 
   handlePost(data){
-    // data = _.assign(data, {
-    //   writer: this.getUserName()
-    // });
     const formData = new FormData();
     formData.append('file', this.state.selectedFile);
     formData.append('title', data.title);
@@ -30,7 +27,7 @@ class WriteContainer extends Component {
     formData.append('category', data.category);
     formData.append('writer', this.getUserName());
 
-    return this.props.setContents(formData)
+    return this.props.setContent(formData)
       .then(() => {
         if(this.props.isSuccess === 'SUCCESS'){
           document.location = '/manage';
@@ -85,8 +82,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
-    setContents: (contents) => {
-      return dispatch(contentActions.setContents(contents));
+    setContent: (contents) => {
+      return dispatch(contentActions.setContent(contents));
     },
     checkToken: () => {
       return dispatch(memberActions.checkToken());

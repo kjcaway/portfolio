@@ -24,7 +24,6 @@ class ManageContainer extends Component {
 
   loadContents() {
     return this.props.getContents().then(() => {
-      console.log(this.props.contents);
     });
   }
 
@@ -33,7 +32,7 @@ class ManageContainer extends Component {
   }
 
   handleDeleteClick(seq) {
-    return this.props.delContents(seq).then(() => {
+    return this.props.delContent(seq).then(() => {
       if (this.props.contentsStatus === "SUCCESS") {
         console.log(`Delete content seq : ${seq}`);
         alert("Success");
@@ -104,8 +103,8 @@ const mapDispatchToProps = (dispatch, props) => {
     checkToken: () => {
       return dispatch(memberActions.checkToken());
     },
-    delContents: seq => {
-      return dispatch(contentActions.delContents(seq));
+    delContent: seq => {
+      return dispatch(contentActions.delContent(seq));
     }
   };
 };

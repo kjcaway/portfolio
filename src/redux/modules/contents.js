@@ -18,6 +18,10 @@ const LOAD_ONE = "LOAD_ONE";
 const LOAD_ONE_SUCCESS = "LOAD_ONE_SUCCESS";
 const LOAD_ONE_FAIL = "LOAD_ONE_FAIL";
 
+const UPDATE = "UPDATE";
+const UPDATE_SUCCESS = "UPDATE_SUCCESS";
+const UPDATE_FAIL = "UPDATE_FAIL";
+
 export function loadContents(data) {
   return {
     type: LOAD
@@ -92,6 +96,25 @@ export function loadContentOneFail(error) {
     error
   };
 }
+
+export function updateContent() {
+  return {
+    type: UPDATE
+  };
+}
+export function updateSuccess() {
+  return {
+    type: UPDATE_SUCCESS
+  };
+}
+
+export function updateFail(error) {
+  return {
+    type: UPDATE_FAIL,
+    error
+  };
+}
+
 // API action
 export function getContents(where = {}) {
   return dispatch => {
@@ -114,13 +137,13 @@ export function getContents(where = {}) {
   };
 }
 
-export function setContents(contents) {
+export function setContent(contents) {
   return dispatch => {
     dispatch(createContents());
     return axios
       .post("/api/contents/", contents)
       .then(res => {
-        console.log("[action] setContents...");
+        console.log("[action] setContent...");
         dispatch(createSuccess());
       })
       .catch(err => {
@@ -130,14 +153,14 @@ export function setContents(contents) {
   };
 }
 
-export function delContents(seq) {
+export function delContent(seq) {
   return dispatch => {
     dispatch(removeContent(seq));
     console.log(seq);
     return axios
       .delete(`/api/contents/${seq}`)
       .then(res => {
-        console.log("[action] delContents...");
+        console.log("[action] delContent...");
         dispatch(removeSuccess());
       })
       .catch(err => {
@@ -171,6 +194,24 @@ export function getContent(where = {}) {
       });
   };
 }
+
+export function modifyContent(content) {
+  return dispatch => {
+    dispatch(updateContent(content));
+
+    return axios
+      .put("/api/contents/", content)
+      .then(res => {
+        console.log("[action] modifyContent...");
+        dispatch(updateSuccess()); 
+      })
+      .catch(err => {
+        console.log(err);
+        dispatch(updateFail(err));
+      });
+  };
+}
+
 
 // Reducer
 const initialState = {
@@ -234,6 +275,19 @@ function reducer(state = initialState, action) {
     case LOAD_ONE_FAIL:
       return update(state, {
         status: { $set: "LOAD_ONE_FAIL" },
+        error: { $set: action.err }
+      });
+    case UPDATE:
+      return update(state, {
+        status: { $set: "UPDATE" }
+      });
+    case UPDATE_SUCCESS:
+      return update(state, {
+        status: { $set: "UPDATE_SUCCESS" }
+      });
+    case UPDATE_FAIL:
+      return update(state, {
+        status: { $set: "UPDATE_FAIL" },
         error: { $set: action.err }
       });
     default:
