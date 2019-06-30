@@ -76,6 +76,10 @@ router.post("/signin", (req, res) => {
  */
 router.get("/check", (req, res) => {
   const token = req.headers['x-access-token'] || req.query.token
+  if(!token){
+    return res.status(401).json({data: "Empty token"});
+  }
+
   const decodedToken = jwt.verify(token, config.jwt.secret);
 
   if(decodedToken){

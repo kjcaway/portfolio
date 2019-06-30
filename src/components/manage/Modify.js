@@ -186,7 +186,7 @@ const Modify = props => {
               </Label>
             </Column>
             <Column span={4}>
-              <Link href={file_path}>
+              <Link href={file_path?file_path:'#'}>
                 <Box padding={2}>
                   <Text bold>{file_origin}</Text>
                 </Box>
