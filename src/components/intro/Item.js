@@ -10,7 +10,6 @@ import {
 } from "gestalt";
 import "gestalt/dist/gestalt.css";
 
-
 const Item = (props) => {
   const onClick = () => {
     alert(props.data.url_link)
@@ -38,7 +37,7 @@ const Item = (props) => {
           <Heading size="sm" color="gray">
             {props.data.title}
           </Heading>
-          <Text>{props.data.contents}</Text>
+          <Text><div dangerouslySetInnerHTML={{__html: props.data.contents}}></div></Text>
         </Box>
       </Box>
     )
@@ -51,7 +50,7 @@ const Item = (props) => {
           <Heading size="sm" color="gray">
           {props.data.title}
           </Heading>
-          <Text>{props.data.contents}</Text>
+          <Text><div dangerouslySetInnerHTML={{__html: props.data.contents}}></div></Text>
         </Box>
         <Box column={2}>
           <Card image={<Avatar name="Jongchan Kang" src={props.data.file_path}/>}>

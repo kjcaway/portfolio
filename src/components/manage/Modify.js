@@ -15,6 +15,8 @@ import {
 } from "gestalt";
 import "gestalt/dist/gestalt.css";
 
+import * as Util from '../../util/common'
+
 const Modify = props => {
   const [title, setTitle] = useState(props.data.title);
   const [contents, setContents] = useState(props.data.contents);
@@ -43,7 +45,7 @@ const Modify = props => {
     setChecked(!checked);
     props.onHandleDelChecked(checked)
   }
-
+  
   return (
     <Modal
       accessibilityCloseLabel="close"
@@ -131,7 +133,7 @@ const Modify = props => {
                 onChange={e => {
                   setContents(e.value);
                 }}
-                value={contents}
+                value={Util.replaceTextareaForView(contents)}
               />
             </Column>
           </Box>

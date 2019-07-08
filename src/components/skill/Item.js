@@ -17,7 +17,7 @@ const Item = (props) => {
         src={props.data.file_path}
       />
       <Text bold size='lg' italic>{props.data.title}</Text>
-      <Text size='md'>{props.data.contents}</Text>
+      <Text size='md'><div dangerouslySetInnerHTML={{__html: props.data.contents}}></div></Text>
     </Box>
   );
 };

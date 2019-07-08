@@ -14,7 +14,6 @@ class IntroContainer extends Component {
   }
 
   render() {
-
     return (
       (this.props.contentsStatus === 'LOAD')?
       <Spinner/>
