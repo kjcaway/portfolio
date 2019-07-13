@@ -1,7 +1,10 @@
 import React,  {Component} from 'react'
 import { connect } from "react-redux";
 import * as contentActions from "../redux/modules/contents";
+
 import Projects from '../components/projects/Projects';
+import Spinner from "../components/common/Spinner";
+
 
 class ProjectsContainer extends Component {
 
@@ -9,22 +12,25 @@ class ProjectsContainer extends Component {
     return this.props.getContents({
       category:'03',
     }).then(() => {
-      console.log(this.props.contents)
     })
   }
 
   render() {
     return (
-      <Projects 
-        data={this.props.contents.data}
-      />
+      this.props.contentsStatus === "LOAD" ?
+        <Spinner/>
+        :
+        <Projects 
+          data={this.props.contentsData}
+        />
     )
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    contents: state.contents
+    contentsData: state.contents.data,
+    contentsStatus: state.contents.status,
   }
 };
 
