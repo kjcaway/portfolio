@@ -24,6 +24,14 @@ class ManageContainer extends Component {
 
   loadContents() {
     return this.props.getContents().then(() => {
+      const {
+        match: { params }
+      } = this.props;
+      const seq = params.seq;
+      if(seq){
+        this.handleModifyClick(seq)
+      }
+  
     });
   }
 

@@ -21,6 +21,12 @@ class ModifyContainer extends Component {
     }
   }
 
+  componentDidMount(props){
+    if(this.props.match.params.seq){
+      this.loadContent();
+    }
+  }
+
   componentDidUpdate(prevProps) {
     if (this.props.match.params.seq !== prevProps.match.params.seq) {
       this.loadContent();
