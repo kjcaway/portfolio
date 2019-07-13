@@ -22,13 +22,12 @@ const Item = (props) => {
           <Card image={<Avatar name="avatar" src={props.data.file_path}/>}>
             <Text align="center" bold size="xl">
               <Box paddingX={3} paddingY={2}>
-                {props.data.writer}
               </Box>
             </Text>
             <Button
-              accessibilityLabel="Go to Blog"
+              accessibilityLabel="Infinity Stone"
               color="red"
-              text="Go to Blog"
+              text="Infinity Stone"
               onClick={() => onClick(props)}
             />
           </Card>
@@ -56,13 +55,12 @@ const Item = (props) => {
           <Card image={<Avatar name="Jongchan Kang" src={props.data.file_path}/>}>
             <Text align="center" bold size="xl">
               <Box paddingX={3} paddingY={2}>
-              {props.data.writer}
               </Box>
             </Text>
             <Button
-              accessibilityLabel="Go to Blog"
+              accessibilityLabel="Infinity Stone"
               color="red"
-              text="Go to Blog"
+              text="Infinity Stone"
               onClick={() => onClick(props)}
             />
           </Card>
