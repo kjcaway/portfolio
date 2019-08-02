@@ -7,7 +7,6 @@ This project is simple portfolio web application using React.
 - gestalt(Web UI Framework for react)
 - axios
 
-
 ### Back-end
 - express
 - mysql(AWS RDS)
@@ -15,7 +14,8 @@ This project is simple portfolio web application using React.
 - jwt
 - storage(AWS S3)
 
-
+#
+#
 ## Execution screen captures
 ### Main
 ![Alt text](/screenshot/root.PNG "Main")
@@ -32,5 +32,6 @@ This project is simple portfolio web application using React.
 ### Manage 2
 ![Alt text](/screenshot/manage_view.PNG "Manage 2")
 
+#
 Go to my blog [http://basketdeveloper.tistory.com](http://basketdeveloper.tistory.com)
 
